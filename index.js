@@ -1,47 +1,53 @@
 'use strict';
-const arrayUniq = require('array-uniq');
 const Conf = require('conf');
 const execa = require('execa');
 const registryUrl = require('registry-url');
 
 const config = new Conf({
 	defaults: {
-		registries: arrayUniq([
+		registries: [
 			'https://registry.npmjs.org/',
 			registryUrl()
-		])
+		]
 	}
 });
 
-exports.list = () => config.get('registries');
+const list = () => new Set(config.get('registries'));
+
+exports.list = list;
 
 exports.add = registry => {
-	const registries = config.get('registries');
+	const registries = list();
 
-	if (registries.indexOf(registry) !== -1) {
+	if (registries.has(registry)) {
 		return registries;
 	}
 
-	config.set('registries', registries.concat(registry));
-	return config.get('registries');
+	registries.add(registry);
+	config.set('registries', Array.from(registries));
+
+	return registries;
 };
 
 exports.delete = registry => {
-	const registries = config.get('registries');
+	const registries = list();
 
-	if (registries.indexOf(registry) === -1) {
+	if (!registries.has(registry)) {
 		return registries;
 	}
 
-	config.set('registries', registries.filter(x => x !== registry));
-	return config.get('registries');
+	registries.delete(registry);
+	config.set('registries', Array.from(registries));
+
+	return registries;
 };
 
 exports.set = registry => {
-	const registries = config.get('registries');
+	const registries = list();
 
-	if (registries.indexOf(registry) === -1) {
-		config.set('registries', registries.concat(registry));
+	if (!registries.has(registry)) {
+		registries.add(registry);
+		config.set('registries', Array.from(registries));
 	}
 
 	execa.shellSync(`npm config set registry ${registry}`);

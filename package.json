@@ -26,7 +26,6 @@
     ""
   ],
   "dependencies": {
-    "array-uniq": "^1.0.3",
     "chalk": "^2.0.1",
     "conf": "^1.1.2",
     "execa": "^0.7.0",

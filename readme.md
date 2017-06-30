@@ -20,7 +20,7 @@ registrySwap.set('https://foobar.unicorn');
 registrySwap.delete('https://foobar.unicorn');
 
 registrySwap.list();
-// ['https://registry.npmjs.org/', ...]
+// Set {'https://registry.npmjs.org/', ...}
 ```
 
 
@@ -28,7 +28,7 @@ registrySwap.list();
 
 ### registrySwap.add(registry)
 
-Add a new registry.
+Add a new registry. Returns a `Set` with the saved registries.
 
 ### registrySwap.set(registry)
 
@@ -36,7 +36,7 @@ Set the active registry. Will be added if it doesn't exist.
 
 ### registrySwap.delete(registry)
 
-Delete a registry.
+Delete a registry. Returns a `Set` with the saved registries.
 
 #### registry
 
@@ -46,7 +46,7 @@ URL to registry.
 
 ### registrySwap.list()
 
-List all saved registries.
+Returns a `Set` with the saved registries.
 
 
 ## CLI
