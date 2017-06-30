@@ -1,6 +1,6 @@
 {
   "name": "registry-swap",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Switch between npm registries",
   "license": "MIT",
   "repository": "kevva/registry-swap",
