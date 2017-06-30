@@ -59,7 +59,7 @@ $ npm install --global registry-swap
 $ registry-swap --help
 
   Usage
-    registry-swap
+    $ registry-swap
 ```
 
 
