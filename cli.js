@@ -17,7 +17,7 @@ const getItems = () => inquirer.prompt([{
 	type: 'list',
 	message: 'Choose a registry',
 	choices: m.list().map(x => ({
-		name: `${normalizeUrl(x)} ${x === registryUrl() ? chalk.gray('*') : ''}`,
+		name: `${normalizeUrl(x)} ${x === registryUrl() ? chalk.green('*') : ''}`,
 		value: x
 	}))
 }]);
